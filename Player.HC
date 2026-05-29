@@ -49,8 +49,20 @@ U0 UpdatePlayer()
 	if(KeyDown(SC_RIGHT)) player.x += PLAYER_SPD;
 
 	// Clamps the screen edges so the ship cant leave it
-	if (player.x < 0) player.x = 0;
-	if (player.x > SCREEN_W - PLAYER_W) player.x = SCREEN_W - PLAYER_W;
+	if (player.x < 0) player.x = 0;
+
+	// SCREEN_W is 640 but the actual drawable area of the window
+	//-is smaller because of border and menu bar on the sides.
+
+	/*
+	  --> Fs stands for ForeSround task <---
+	  In TempleOS every running process is a task and each task has a
+	  "CTask" struct that holds everything about it like its window
+	  dimensions, memory, the "draw_it" pointer, priority, etc. 
+	*/
+	if (player.x > Fs->pix_width - PLAYER_W){
+		player.x = Fs->pix_width - PLAYER_W;
+	}
 
 	// Shooting -> cannot hold space for full auto
 	if (KeyDown(SC_SPACE) && !player.space_held){
@@ -59,14 +71,15 @@ U0 UpdatePlayer()
 	}
 
 	// space is released
-	if (!KeyDown(SC_SPACE)){
+	if (!KeyDown(SC_SPACE)){
 		player.space_held = FALSE;
 	}
 }
 
-U0 DrawPlayer()
+U0 DrawPlayer(CDC *dc)
 {
 	if(player.alive){
-		GrRect(DC, player.x, player.y, PLAYER_W, PLAYER_H, GREEN);
+		dc->color = GREEN;
+		GrRect(dc, player.x, player.y, PLAYER_W, PLAYER_H);
 	}
 }
