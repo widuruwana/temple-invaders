@@ -67,7 +67,7 @@ U0 UpdatePlayer()
 	// Shooting -> cannot hold space for full auto
 	if (KeyDown(SC_SPACE) && !player.space_held){
 		player.space_held = TRUE;
-		// FirePlayerBullet(player.x + PLAYER_W / 2, player.y);
+		FirePlayerBullet(player.x + PLAYER_W / 2, player.y);
 	}
 
 	// space is released

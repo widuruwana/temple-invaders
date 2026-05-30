@@ -1,4 +1,5 @@
 #include "C:/Home/Projects/temple-invaders/Defs.HC"
+#include "C:/Home/Projects/temple-invaders/Bullets.HC"
 #include "C:/Home/Projects/temple-invaders/Player.HC"
 
 // DrawIT is called automatically by templeOS every frame
@@ -10,13 +11,16 @@ U0 DrawIt(CTask *, CDC *dc)
 	dc->color = BLACK;
 	GrRect(dc, 0, 0, SCREEN_W, SCREEN_H);
 
-	// draw the player, pass the dc through
+	// draw the player
 	DrawPlayer(dc);
+	// draw the bullet
+	DrawBullet(dc);
 }
 
 U0 Game()
 {
 	InitPlayer; // Set start position and state for the player
+	InitBullet; // same for the bullet
 
 	// Resize the window to full screen
 	WinMax;
@@ -28,7 +32,8 @@ U0 Game()
 	// Loop runs until ESC is physically held down
 	while (!KeyDown(SC_ESC)){
 		UpdatePlayer;	// Read input & update player position
-		Sleep(33);	// wait ~33ms (33.333...ms -> target  30 FPS)
+		UpdateBullet;
+		Sleep(33);	// 33ms targets 30Fps
 	}
 
 	SettingsPop; // restore OSstate
