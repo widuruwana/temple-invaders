@@ -14,13 +14,13 @@ U0 DrawIt(CTask *, CDC *dc)
 	// draw the player
 	DrawPlayer(dc);
 	// draw the bullet
-	DrawBullet(dc);
+	DrawBullets(dc);
 }
 
 U0 Game()
 {
 	InitPlayer; // Set start position and state for the player
-	InitBullet; // same for the bullet
+	InitBullets; // same for the bullet
 
 	// Resize the window to full screen
 	WinMax;
@@ -32,7 +32,7 @@ U0 Game()
 	// Loop runs until ESC is physically held down
 	while (!KeyDown(SC_ESC)){
 		UpdatePlayer;	// Read input & update player position
-		UpdateBullet;
+		UpdateBullets;
 		Sleep(33);	// 33ms targets 30Fps
 	}
 

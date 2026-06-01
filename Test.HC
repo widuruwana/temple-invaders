@@ -1,2 +1,0 @@
-"Hello Terry\n";
-

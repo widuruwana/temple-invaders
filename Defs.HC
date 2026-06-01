@@ -9,7 +9,9 @@
 #define PLAYER_SPD 4
 
 // Bullets
+#define MAX_BULLETS 4
 #define PLAYER_BULLET_SPD 10
+#define ENEMY_BULLET_SPD 4
 #define BULLET_W 4
 #define BULLET_H 12
 
@@ -23,7 +25,7 @@
 #define SC_RIGHT 77  // right arrow
 #define SC_SPACE 57  // spacebar
 #define SC_ESC 1 // escape
-
+
 // Bt() tests a single bit; if the bit at position sc is set in
 // kbd.down_bitmap then that key is physically held.
 Bool KeyDown(I64 sc)
